@@ -1,0 +1,124 @@
+* {
+    box-sizing: border-box; /* con border-box hacemos que los bordes y paddings se incluyan dentro del tamaño total de nuestro elemento */
+    margin: 0; /* eliminamos las margenes predeterminadas de los navegadores */
+    padding: 0; /* eliminamos los paddings predeterminados de los navegadores */
+}
+body {
+    background-color: #0b090a; /* fondo general de la pantalla en tono negro oscuro elegante */
+    color: #ffffff; /* color de texto blanco por defecto */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex; /* activamos el flexbox para ordenar los elementos */
+    flex-direction: column; /* organizamos los elementos en columna de arriba hacia abajo */
+    justify-content: center; /* centramos los elementos horizontalmente */
+    align-items: center; /* centramos los elementos verticalmente */
+    min-height: 100vh; /* hacemos que ocupe al menos toda la altura de la pantalla */
+    gap: 25px; /* dejamos un espacio de 25px entre los elementos principales */
+}
+.texto-encabezado {
+    font-size: 1.1rem;
+    color: #a39baf; /* color gris morado suave para el texto secundario */
+    text-align: center;
+}
+/* Contenedor principal de la barra de navegación */
+.menu-navegacion {
+    background-color: #0004f8; /* fondo violeta muy oscuro para la tarjeta del menú */
+    padding: 14px 28px;
+    border-radius: 12px; /* redondeamos los bordes */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); /* sombra profunda para dar efecto de relieve */
+}
+
+.lista-menu {
+    display: flex; /* ponemos los ítems del menú en fila */
+    list-style: none; /* quitamos los puntos o viñetas de la lista */
+    gap: 30px; /* dejamos 30px de separación entre cada enlace */
+}
+
+/* Contenedor relativo clave para posicionar el tooltip justo encima de cada enlace */
+.item-menu {
+    position: relative; /* posicionamiento relativo para que el tooltip hijo se ubique respecto a este elemento */
+    display: inline-block;
+}
+
+.enlace-menu {
+    color: #ffffff; /* cambiamos a un color verde esmeralda brillante para los enlaces */
+    text-decoration: none; /* quitamos la línea subrayada por defecto de los enlaces */
+    font-weight: 600;
+    font-size: 1.05rem;
+    padding: 8px 16px;
+    border-radius: 6px; /* redondeamos los bordes */
+    transition: background-color 0.3s ease, color 0.3s ease; /* animación suave al cambiar de color */
+    display: block;
+}
+
+/* Efecto hover sobre el enlace del menú */
+.item-menu:hover .enlace-menu {
+    background-color: #fbc101; /* fondo verde brillante al pasar el cursor */
+    color: #0b090a; /* el texto cambia a negro oscuro para hacer contraste */
+}
+
+/* Estilo base del Tooltip (el cartel flotante) */
+.cartel {
+    position: absolute; /* posicionamiento absoluto respecto al item-menu */
+    bottom: 125%; /* ubicamos el tooltip flotando un poco más arriba del enlace */
+    left: 50%; /* lo centramos horizontalmente */
+    transform: translateX(-50%); /* ajuste exacto de centrado */
+    background-color: #f6f600; /* cambiamos el fondo del tooltip a un tono morado/púrpura vibrante */
+    color: #ffffff; /* texto blanco */
+    font-size: 0.85rem;
+    padding: 8px 14px;
+    border-radius: 6px; /* redondeamos los bordes */
+    white-space: nowrap; /* evitamos que el texto del tooltip se baje de línea */
+    pointer-events: none; /* evitamos que interfiera con el mouse */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* sombra para el cartel flotante */
+    opacity: 0; /* ocultamos el tooltip por defecto */
+    visibility: hidden; /* ocultamos la visibilidad para que no se pueda interactuar */
+    transition: opacity 0.3s ease,
+        visibility 0.3s ease,
+        transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* transición elástica y suave */
+    z-index: 10; /* aseguramos que flote por encima de los demás elementos */
+}
+
+/* Flecha inferior del tooltip */
+.cartel::after {
+    content: "";
+    position: absolute;
+    top: 100%; /* posicionamos la flecha justo debajo del cartel */
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: #7209b7 transparent transparent transparent; /* color morado igual al fondo del tooltip */
+}
+
+/* Estado general al pasar el cursor (:hover) para mostrar el tooltip */
+.item-menu:hover .cartel {
+    opacity: 1; /* hacemos visible el tooltip */
+    visibility: visible;
+}
+
+/* Animación 1: Desvanecer (Fade-in) */
+.tooltip-desvanecer {
+    transform: translate(-50%, 5px); /* posición inicial levemente abajo */
+}
+
+.item-menu:hover .tooltip-desvanecer {
+    transform: translate(-50%, 0); /* sube a su posición original al hacer hover */
+}
+
+/* Animación 2: Deslizar (Slide-in) */
+.tooltip-deslizar {
+    transform: translate(-50%, -15px); /* posición inicial más arriba */
+}
+
+.item-menu:hover .tooltip-deslizar {
+    transform: translate(-50%, 0); /* baja a su posición original al hacer hover */
+}
+
+/* Animación 3: Escalar (Scale-in) */
+.tooltip-escalar {
+    transform: translateX(-50%) scale(0.6); /* inicia más pequeño (escala reducida) */
+}
+
+.item-menu:hover .tooltip-escalar {
+    transform: translateX(-50%) scale(1); /* se expande a su tamaño normal al hacer hover */
+}
